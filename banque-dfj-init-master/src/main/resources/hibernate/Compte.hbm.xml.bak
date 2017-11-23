@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="banque">
+	<class name="Compte">
+		<id name="numero" >
+			<generator class="assigned" />
+		</id>
+		<property name="solde"/>
+		<property name="decouvertAutorise"/>
+		<list name="lesOperations" cascade="all,delete-orphan" lazy="false">
+			<key column="compte_id"/>
+			<index column="index"/>
+			<one-to-many class="Operation"  />
+		</list>
+
+	</class>
+</hibernate-mapping>

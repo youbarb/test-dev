@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html data-ng-app="banqueApp"> 
+<head>
+<script type="text/javascript" src="js/angular.js"></script> 
+<script type="text/javascript" src="js/biblio.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body data-ng-controller="compteController">
+<div data-ng-if="!compte">
+<button data-ng-click="loadAll()">Load</button> &nbsp; <button data-ng-click="reset()">reset</button>
+<table border=1>
+	<tr><th>numero</th><th>solde</th><th>découvert</th></tr>
+	<!-- Construction dynamique du contenu du tableau -->
+	<tr data-ng-repeat="compte in comptes">
+		<td style="color: blue; text-decoration: underline; pointer: cursor" data-ng-click="load(compte.numero)">
+			{{compte.numero}}
+		</td>
+		<td>{{compte.solde}}</td>
+		<td>{{compte.decouvertAutorise}}</td>
+	</tr>
+</table>
+</div>
+<div data-ng-if="compte">
+<h1>Compte n°{{compte.numero}}</h1>
+<ul>
+<li>Solde : {{compte.solde}}
+<li>Découvert autorisé : {{compte.decouvertAutorise}} €
+<li>Liste de opérations :
+	<table>
+		<tr><th>date</th><th>montant</th><th>type</th></tr>
+		<tr data-ng-repeat="operation in compte.lesOperations">
+			<td>{{operation.date}}</td>
+			<td>{{operation.montant}}</td>
+			<td>{{operation.type}}</td>
+		</tr>
+	</table>
+</ul>
+<button data-ng-click="back()">Back</button>
+</div>
+</body>
+</html>
